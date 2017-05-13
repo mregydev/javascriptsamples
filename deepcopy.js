@@ -3,6 +3,8 @@
 ///**********///
 
 
+//Deep copy an object into another 
+//Returns cloned object
 function DeepCopy(srcObj) {
     //In case source object is primitive return
     if (typeof srcObj != "object")
