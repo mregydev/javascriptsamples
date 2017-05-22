@@ -22,11 +22,15 @@ function DeepCopy(srcObj) {
 
 
 
-//Example 
 
+/**********Example using DeepCopy function **********/
+console.log("%cMr.Egydev --- DeepCopy function Test ---", "color:blue;font-weight:bold;");
+
+//Intialize instances and then clone them
 var firstStudent = { firstName: "alaa", major: "computer science", university: { name: "AinShams", location: "Cairo" } },
     secondStudent = { firstName: "yehia", major: "computer science", university: { name: "Helwan", location: "Helwan" } },
     //Cloning two objects (firstStudent,secondStudent) and assign them using destructring
     [firstStudentClone, secondStudentClone] = [DeepCopy(firstStudent), DeepCopy(secondStudent)];
+
 
 console.log(firstStudentClone, secondStudentClone);
