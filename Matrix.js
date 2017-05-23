@@ -131,7 +131,7 @@ class Matrix {
 
     //return multiply of current instance with passed matrix instance
     Multiply(matrix) {
-        var result = new Matrix();
+        let result = new Matrix();
 
         if (this.IsValid() && matrix.IsValid()) {
             result._rows = Object.assign([], this._rows.map((row, rowIndex) => row.map((val, colIndex) => val * matrix._rows[rowIndex][colIndex])));
@@ -177,7 +177,7 @@ class Matrix {
 
     //string representation
     toString() {
-        var str = "";
+        let str = "";
         this._rows.forEach(arr => {
             arr.forEach(elem => str += `${elem} `);
             str += `\n`;
