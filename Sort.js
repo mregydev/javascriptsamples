@@ -1,13 +1,14 @@
 ///*****Mr-EgyDev*****///
+//Destructuring   
 ///**********///
 
-//Insertion Sort Ascending 
-Array.prototype.InsertionSortAsc = function () {
+//Insertion sort 
+Array.prototype.InsertionSort = function (isAsecending = false) {
     for (let mainCounter = 1; mainCounter < this.length; ++mainCounter) {
         //Destructuring
         let [counter, key] = [mainCounter - 1, this[mainCounter]];
 
-        while (counter >= 0 && this[counter] > key) {
+        while (counter >= 0 && (!isAsecending && this[counter] < key || isAsecending && this[counter] > key)) {
             //Assign is done first then decrement :)
             this[counter + 1] = this[counter--];
         }
@@ -17,46 +18,8 @@ Array.prototype.InsertionSortAsc = function () {
     return this;
 };
 
-
-//Insertion sort Descending
-Array.prototype.InsertionSortDesc = function () {
-    for (let mainCounter = 1; mainCounter < this.length; ++mainCounter) {
-        //Destructuring
-        let [counter, key] = [mainCounter - 1, this[mainCounter]];
-
-        while (counter >= 0 && this[counter] < key) {
-            //Assign is done first then decrement :)
-            this[counter + 1] = this[counter--];
-        }
-        //Increment is made then assigment
-        this[++counter] = key;
-    };
-    return this;
-};
-
-//Selection Sort Ascending
-Array.prototype.SelectionSortAsc = function () {
-
-    let currentIndex = 0;
-
-    for (let mainCounter = 0; mainCounter < this.length - 1; ++mainCounter) {
-
-        let smallestIndex = mainCounter;
-
-        for (let counter = mainCounter + 1; counter < this.length; ++counter) {
-            smallestIndex = this[smallestIndex] < this[counter] ? smallestIndex : counter;
-        }
-        if (smallestIndex != mainCounter) {
-            //replace with destructuring
-            [this[smallestIndex], this[mainCounter]] = [this[mainCounter], this[smallestIndex]];
-        }
-    }
-    return this;
-};
-
-
-//Selection Sort Descending
-Array.prototype.SelectionSortDesc = function () {
+//Selection Sort 
+Array.prototype.SelectionSort = function (isAscending = false) {
 
     let currentIndex = 0;
 
@@ -65,7 +28,7 @@ Array.prototype.SelectionSortDesc = function () {
         let biggestIndex = mainCounter;
 
         for (let counter = mainCounter + 1; counter < this.length; ++counter) {
-            biggestIndex = this[biggestIndex] > this[counter] ? biggestIndex : counter;
+            biggestIndex = !isAscending && this[biggestIndex] > this[counter] || isAscending && this[biggestIndex] < this[counter] ? biggestIndex : counter;
         }
 
         if (biggestIndex != mainCounter) {
@@ -76,12 +39,50 @@ Array.prototype.SelectionSortDesc = function () {
     return this;
 };
 
+//Merge sort
+Array.prototype.MergeSort = function (isAscending = true) {
+    return MergeSort(this, isAscending);
+};
+
+
+//Count sort
+Array.prototype.QuickSort = function (isAsecending = true) {
+    return Quicksort(this,0,this.length,isAsecending);
+};
+
+
+
+
+//Helper functions 
+function Quicksort(arr, low, high,isAsecending){
+    if (low < high){
+        let pivot_location = Partition(arr,low,high,isAsecending);
+        Quicksort(arr,low, pivot_location,isAsecending)
+        Quicksort(arr, pivot_location + 1, high,isAsecending)
+        return arr;
+    }
+}
+
+function Partition(arr, low, high,isAscending) {
+    let pivot = arr[low];
+    let currentIndex = low;
+
+    for (let i = low + 1; i < high; ++i) {
+        if (!isAscending&& arr[i] > pivot  || isAscending && arr[i]<pivot) {
+            [arr[i], arr[currentIndex]] = [arr[currentIndex], arr[i]];
+            currentIndex += 1;
+        }
+    }
+    [pivot, arr[currentIndex]] = [arr[currentIndex], pivot];
+    return currentIndex;
+}
+
 
 function Merge(firstArr, secondArr, isAscending) {
     let mergeResult = new Array();
 
     while ([firstArrValue, secondArrValue] = [firstArr[0], secondArr[0]]) {
-
+        //read value from first array or second array 
         let getFromFirstArr = isAscending && firstArrValue < secondArrValue || !isAscending && firstArrValue > secondArrValue;
 
         mergeResult.push(getFromFirstArr ? firstArrValue : secondArrValue);
@@ -104,23 +105,20 @@ function MergeSort(arr, isAscending) {
         return arr;
     }
 
-    let subArr1 = MergeSort(arr.slice(0, (arr.length-1)/ 2));
+    let subArr1 = MergeSort(arr.slice(0, arr.length / 2), isAscending);
 
-    let subArr2 = MergeSort(arr.slice((arr.length-1)/ 2 + 1, arr.length - 1));
+    let subArr2 = MergeSort(arr.slice(arr.length / 2, arr.length), isAscending);
+
 
     return Merge(subArr1, subArr2, isAscending);
-}
-
-Array.prototype.MergeSort = function (isAscending) {
-    return  MergeSort(this, isAscending);
-}
+};
 
 
 
 //Example 
-// var arr = [3, 2, 1, 5];
-// console.log(arr.InsertionSortDesc());
+var arr = [2, 1, 5];
 
-var arr = [3,2,1,5];
-
-console.log(arr.MergeSort(true));
+console.log(arr.MergeSort());
+console.log(arr.SelectionSort(true));
+console.log(arr.InsertionSort(false));
+console.log(arr.QuickSort(false));
