@@ -114,11 +114,3 @@ function MergeSort(arr, isAscending) {
 };
 
 
-
-//Example 
-var arr = [2, 1, 5];
-
-console.log(arr.MergeSort());
-console.log(arr.SelectionSort(true));
-console.log(arr.InsertionSort(false));
-console.log(arr.QuickSort(false));
