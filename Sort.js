@@ -112,5 +112,3 @@ function MergeSort(arr, isAscending) {
 
     return Merge(subArr1, subArr2, isAscending);
 };
-
-
