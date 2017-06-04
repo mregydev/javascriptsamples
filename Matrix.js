@@ -111,7 +111,7 @@ class Matrix {
         }
 
         if (this.IsValid(undefined, colIndex)) {
-            this._rows.forEach((elem, index) => elem[colIndex] = value[index]);
+            this._rows.forEach((row, index) => row[colIndex] = value[index]);
             return true;
         }
         return false;
@@ -169,8 +169,8 @@ class Matrix {
     //Get sun of column with column index
     GetColumnSum(colIndex) {
         if (this.IsValid(undefined, colIndex)) {
-            return this._rows.reduce((sum, elem) => {
-                return sum + elem[colIndex];
+            return this._rows.reduce((sum, row) => {
+                return sum + row[colIndex];
             }, 0);
         }
     }
