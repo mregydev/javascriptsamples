@@ -57,7 +57,7 @@ class Matrix {
         return this._rows && this._rows.length && this._rows.length > rowIndex && this._rows[0] && this._rows[0].length > colIndex;
     }
 
-    //Deep copy current instance from passed matrix instance
+    // copy current instance from passed matrix instance
     CopyFromAnother(matrix) {
         if (matrix && matrix.IsValid()) {
             matrix.Rows.forEach((row, rowIndex) => this.CopyRowFromArray(rowIndex, ...row));
@@ -65,7 +65,7 @@ class Matrix {
         }
         return false;
     }
-    //Gets deep copy of current instance
+    //Gets  copy of current instance
     GetCopy() {
         if (this.IsValid()) {
             let copyMatrix = new Matrix(this.RowsLen, this.ColumnsLen);
@@ -90,7 +90,7 @@ class Matrix {
         return false;
     }
 
-    //Deep copy passed array value into row with passed row index
+    // copy passed array value into row with passed row index
     CopyRowFromArray(rowIndex, ...value) {
         if (value.length > this.ColumnsLen || !this.IsNumber(value)) {
             return false;
@@ -104,7 +104,7 @@ class Matrix {
     }
 
 
-    //Deep copy passed array value into column with passed column index
+    // copy passed array value into column with passed column index
     CopyColumnFromArray(colIndex, ...value) {
         if (value.length > this.RowsLen || !this.IsNumber(value)) {
             return false;
@@ -117,13 +117,13 @@ class Matrix {
         return false;
     }
 
-    //Deep copy row with passed row index
+    // copy row with passed row index
     GetCopyOfRow(rowIndex) {
         return this.IsValid(rowIndex) ? Object.assign([], this._rows[rowIndex]) : undefined;
     }
 
 
-    //Deep copy column with passed column index
+    // copy column with passed column index
     GetCopyOfColumn(colIndex) {
         return this.IsValid(undefined, colIndex) ? this._rows.map(row => row[colIndex]) : undefined;
     }
@@ -208,13 +208,13 @@ matrix.AddElement(0, 0, 3);
 console.log(matrix.toString());
 
 
-//Deep Copy from another test using CopyFromAnother
+// Copy from another test using CopyFromAnother
 console.log("%c******Copy previous Matrix with CopyFromAnother Test******", "color:red;font-weight:bold;");
 var copyMatrix = new Matrix(matrix.RowsLen, matrix.ColumnsLen);
 copyMatrix.CopyFromAnother(matrix);
 console.log(copyMatrix.toString());
 
-//Deep Copy from another test using CopyColumnFromArray
+// Copy from another test using CopyColumnFromArray
 console.log("%c******Previous Matrix with CopyColumnFromArray Test******", "color:red;font-weight:bold;");
 copyMatrix.CopyColumnFromArray(1, 44, 55, 66);
 console.log(copyMatrix.toString());
